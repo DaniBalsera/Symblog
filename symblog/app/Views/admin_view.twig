@@ -1,0 +1,16 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+  <div class="contenedorPanel">
+  <p>
+    <a href="/addblog" class="anadir">Añadir nuevo blog</a>
+  </p>
+  <p>
+    <a href="/adduser" class="anadir">Añadir nuevo usuario</a>
+  </p>
+  </div>
+{% endblock %}
+
+{% block sidebar %}
+    {{ include("sidebar.twig", { tags: tags, allComments: data.comments }) }}
+{% endblock %}

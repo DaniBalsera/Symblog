@@ -1,0 +1,57 @@
+{% extends "layout.twig" %}
+
+{% block body %}
+    <article class="blog">
+        <div class="date">
+            <time datetime="{{ data.blog.created_at }}"></time>
+        </div>
+        <header>
+            <h2><a href="show?id={{ data.blog.id }}">{{ data.blog.title }}</a></h2>
+        </header>
+        <img src="img/{{ data.blog.image }}" alt="Blog Image" />
+        <div class="snippet">
+            <p>{{ data.blog.blog }}</p>
+        </div>
+
+        <!-- Comments Section -->
+        <section class="comments">
+            <h3>Comments</h3>
+            {% for comment in data.blog.comments %}
+                <div class="comment {% if loop.index is odd %}odd{% endif %}">
+                    <p><strong>{{ comment.user }}</strong>: {{ comment.comment }}</p>
+                    <p class="comment-date">{{ comment.created_at | date('l, F j, Y') }}</p>
+                </div>
+            {% endfor %}
+        </section>
+        
+        <!-- Comment Form -->
+        <section class="comment-form">
+            <h2 style="text-align:center";>Publica tu comentario</h2>
+            {% if data.error %}
+                <div class="error">{{ data.error }}</div>
+            {% endif %}
+            <form action="/postComment" method="POST">
+                <input type="hidden" name="blog_id" value="{{ data.blog.id }}"/>
+                <div class="form-group">
+                    <label for="user">Usuario:</label>
+                    <input type="text" id="user" name="user" required/>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Comentario:</label>
+                    <textarea id="comment" name="comment" rows="4" required></textarea>
+                </div>
+                <button type="submit">Publicar comentario</button>
+            </form>
+        </section>
+        
+        <footer class="meta">
+            <p>Comments: <a href="#">{{ data.blog.numComments() }}</a></p>
+            <p>Posted by <span class="highlight">{{ data.blog.author }}</span> at {{ data.blog.created_at|date('Y-m-d H:i:s') }}</p>
+            <p>Tags: <span class="highlight">{{ data.blog.tags }}</span></p>
+        </footer>
+    </article>
+{% endblock %}
+
+{% block sidebar %}
+    {{ include("sidebar.twig", { tags: tags, allComments: data.comments }) }}
+{% endblock %}

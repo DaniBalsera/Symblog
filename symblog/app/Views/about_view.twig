@@ -1,0 +1,16 @@
+{% extends "layout.twig" %}
+
+{% block body %}
+    <h2>About Symblog</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed, phasellus luctus dapibus. Pretium nisi proin quisque malesuada dignissim id natoque class ac,
+       tincidunt etiam fames sem quam curabitur blandit imperdiet semper, pellentesque metus ut venenatis habitant nunc sociosqu curae. 
+       Vulputate turpis nulla nibh dignissim integer class neque, cras aliquet suspendisse sociosqu eros.Nisi curae interdum varius sollicitudin laoreet blandit feugiat, 
+       sem at volutpat platea aptent ultricies, morbi posuere vitae quam cursus quis. Aliquam class feugiat ac maecenas elementum dictumst suspendisse inceptos tristique, senectus blandit sapien justo tellus facilisis morbi urna est, cursus sed fringilla massa libero nec metus varius. Curae nunc class nisl netus tortor mi aliquam quam fames, 
+        ullamcorper accumsan donec litora non rutrum cursus iaculis, primis libero penatibus orci in nec congue justo.
+      </p>
+   
+{% endblock %}
+
+{% block sidebar %}
+    {{ include("sidebar.twig", { tags: tags, allComments: data.comments }) }}
+{% endblock %}
